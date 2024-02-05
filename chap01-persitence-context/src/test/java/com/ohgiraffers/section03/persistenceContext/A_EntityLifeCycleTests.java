@@ -180,7 +180,7 @@ public class A_EntityLifeCycleTests {
         entityManager.remove(foundMenu);  // 2번은 지울걸로 예정, 예정된 삭제이기에 새로 요청하지 않고 null 반환
         Menu refoundMenu = entityManager.find(Menu.class, 2);
 
-        Assertions.assertEquals(2,foundMenu.getMenuCode());
+        Assertions.assertEquals(2,foundMenu.getMenuCode());  // 남아있음
         Assertions.assertEquals(null, refoundMenu);
     }
 
@@ -199,7 +199,7 @@ public class A_EntityLifeCycleTests {
 
         //when
         menuToDetach.setMenuName("수박죽");
-        Menu refoundMenu = entityManager.find(Menu.class, 3);  //remove는 null을 반환하지만 준속성상태는 다시 db에서 조회해옴
+        Menu refoundMenu = entityManager.find(Menu.class, 3);  //remove는 null을 반환하지만 준영속성상태는 다시 db에서 조회해옴
 
         // 준영속 엔티티와 영속 엔티티의 해쉬코드는 다른 상태다..
         System.out.println(menuToDetach.hashCode());
@@ -264,5 +264,10 @@ public class A_EntityLifeCycleTests {
         Menu mergedMenu = entityManager.find(Menu.class,999);
 
         Assertions.assertEquals("수박죽", mergedMenu.getMenuName());
+    }
+
+    public static void main(String[] args){
+        Menu menu = new Menu();
+        System.out.println(menu);
     }
 }
