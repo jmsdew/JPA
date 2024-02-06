@@ -43,13 +43,13 @@ public class PropertyAccessTests {
         //when
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        entityManager.persist(member);   // 1번
-        entityTransaction.commit();      // 2번 (why?)
+        entityManager.persist(member);
+        entityTransaction.commit();
 
         //then
         String jpql = "SELECT a.memberId FROM member_section05_subsection02 a WHERE a.memberNo = 1";
         String registedNickname = entityManager.createQuery(jpql, String.class).getSingleResult();
         System.out.println(registedNickname);
-        Assertions.assertEquals("0user01", registedNickname);
+        Assertions.assertEquals("user01", registedNickname);
     }
 }

@@ -12,7 +12,6 @@ import jakarta.persistence.*;
 @Access(AccessType.PROPERTY)
 public class Member {
 
-
     @Column(name = "member_no")
     private int memberNo;
 
@@ -34,7 +33,7 @@ public class Member {
     @Access(AccessType.PROPERTY)
     public String getMemberId() {
         System.out.println("getMemberId를 이용한 access 확인");
-        return 0+memberId;
+        return memberId;
     }
 
 
