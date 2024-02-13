@@ -17,6 +17,7 @@ public class MenuController {
 
     @PostMapping
     public ResponseEntity<Object> insertMenu(@RequestBody MenuDTO menuDTO){
+                // 그냥 ResponseEntity 만 넣어도 똑같이 동작함.
         Object result = menuService.insertMenu(menuDTO);
 
         if(!(result instanceof Menu)){

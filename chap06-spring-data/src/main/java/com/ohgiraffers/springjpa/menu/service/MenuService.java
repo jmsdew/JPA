@@ -20,6 +20,7 @@ public class MenuService {
     @Autowired
     private CategoryFind categoryFind; // 느슨한 결합구조를 위하여 service를 직접 넣지않음
     public Object insertMenu(MenuDTO menuDTO) {
+            // 실패시 string 성공시 Menu 반환 위해서 Object 타입
         System.out.println(menuDTO);
 
         // 메뉴 이름이 존재하는가
@@ -34,7 +35,7 @@ public class MenuService {
             return new String(menuDTO.getMenuPrice() + "이걸 팔아서 장사를 어떻게해?");
         }
 
-        // 카테고리 코드
+        // 카테고리 코드  -- 카테고리 서비스로 바로 보내지 않음. infra  만듦
         Integer categoryCode = categoryFind.getCategory(menuDTO.getCategoryCode());
 
         if(Objects.isNull(categoryCode)){
@@ -46,7 +47,7 @@ public class MenuService {
         newMenu.setMenuPrice(menuDTO.getMenuPrice());
         newMenu.setCategory(menuDTO.getCategoryCode());
 
-        Menu result = menuRepository.save(newMenu);
+        Menu result = menuRepository.save(newMenu);  //db등록
 
         return result;
 
